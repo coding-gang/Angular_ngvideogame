@@ -14,23 +14,28 @@
 </div>
 
 <div class="games">
-    <div class="game">
-        <div class="game-thumb-container">
-            <img
-            src="https://media.rawg.io/media/games/84d/84da2ac3fdfc6507807a1808595afb12.jpg"
-            alt="thumbnail"
-            class="game-thumbnail"
-            />
-        </div>
-        <div class="game-description">
-            <p class="game-name">Name</p>
-            <div class="game-platforms">
+    <ng-container *ngFor="let game of games">
+        <div class="game">
+            <div class="game-thumb-container">
                 <img
-                class="game-platform"
-                src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAxNiAxNic+PHBhdGggZmlsbD0nI0ZGRicgZD0nTTMuNTY0IDEuMzU3bC0uMDIyLjAyYy4wNDYtLjA0OC4xMS0uMS4xNTQtLjEyOEM0Ljk0OC40MzUgNi4zOTYgMCA4IDBjMS41MDlgMCAyLjkwOC40MTUgNC4xMSAxLjEzNi4wODYuMDUyLjMyNC4yMTUuNDQ2LjM2M0MxMS40LjlyMiA3Ljk5MyAyLjk2MiA3Ljk5MyAyLjk2MmMtMS4xNzctLjkwOC0yLjl2LTEuNTl2LTMuMDY3LTEuNZQ2LS42NzQtLjE4NS0xLjE0LS4wMy0xLjM2Mi4xNDF6bTEwLjMwNSAxLjIwOGMtLjAzNS0uMDQtLjA3NC0uMDc2LS4xMDktLjExNi0uMjkzLS4zMjItLjY1My0uNc0uOTc4LS4zNzgtLjl5NS4wOTltMS42Ni41ODQtMy4NDlgMi4xNzIgMCAwIDEuODk0IDEuODQxIDMuMDUzIDMuNzIzIDEuMTU5IDEuODgzIDEuODUylDMuMzYyIDEuNDl2lDUuNDE1QTcuOTY5IDcuOTY5IDAgMD" 
-                alt="slug"
+                *ngIf="game.background_image"
+                src="{{ game.background_image }}"
+                alt="thumbnail"
+                class="game-thumbnail"
                 />
+                <p *ngIf="!game.background_image">No image</p>
+            </div>
+            <div class="game-description">
+                <p class="game-name">{{ game.name }}</p>
+                <div class="game-platforms" >
+                    <img
+                    *ngFor="let gamePlatform of game.parent_platforms"
+                    class="game-platform"
+                    src="assets/images/platforms/{{ gamePlatform.platform.slug }}.svg" 
+                    alt="{{ gamePlatform.platform.slug }}"
+                    />
+                </div>
             </div>
         </div>
-    </div>
+    </ng-container>
 </div>
